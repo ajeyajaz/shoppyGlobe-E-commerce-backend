@@ -5,6 +5,13 @@ const express = require('express');
 const router = express.Router();
 
 
+router.get('/', async(req, res)=> {
+
+    const cart = await Cart.findOne({user: req.user._id}) || {};
+    res.send(cart);
+});
+
+
 router.post('/', async(req, res) => {
 
     const userId = req.user._id;
