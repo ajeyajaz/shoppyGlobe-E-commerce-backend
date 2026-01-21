@@ -20,6 +20,16 @@ GET  - http://localhost:4000/products/:id
 ```
 ![Get Product](screenshots/thunderclient/get-product.png)
 
+``` 
+POST  - http://localhost:4000/products/
+```
+![Get Product](screenshots/thunderclient/post-product.png)
+
+```
+DELETE  - http://localhost:4000/products/:id
+```
+![Get Product](screenshots/thunderclient/delete-product.png)
+
 
 
 #### carts
