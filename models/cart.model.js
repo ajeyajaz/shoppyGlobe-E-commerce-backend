@@ -1,4 +1,7 @@
 const mongoose = require('mongoose');
+const Joi = require('joi')
+Joi.objectId = require('joi-objectid')(Joi)
+
 
 const cartItemSchema = new mongoose.Schema({
     _id: {
@@ -22,4 +25,16 @@ const cartSchema = new mongoose.Schema({
 const Cart = mongoose.model('Cart', cartSchema);
 
 
-module.exports = Cart;
+function validateCart(value){
+
+    const schema = Joi.object({
+        productId: Joi.objectId(),
+        quantity: Joi.number().min(1).max(10)
+    });
+
+    return {error, value} = schema.validate(value);
+};
+
+
+exports.Cart = Cart;
+exports.validate = validateCart;
