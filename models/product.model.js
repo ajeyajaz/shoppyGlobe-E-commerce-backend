@@ -11,7 +11,7 @@ const productSchema = new mongoose.Schema({
 
 const Product = mongoose.model('Product', productSchema);
 
-
+// return  errors if validation fails or undifined
 function validateProduct(value={}){
 
     const schema = joi.object({
@@ -22,7 +22,7 @@ function validateProduct(value={}){
         stock: joi.number().min(0).required(),
     })
 
-    return {error, value} = schema.validate(value);
+    return {error} = schema.validate(value);
 }
 
 

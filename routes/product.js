@@ -4,9 +4,9 @@ const { default: mongoose } = require('mongoose');
 
 const router = express.Router();
 
-
+// returns true ? if valid mongo ObjectId : false
 function isValidId(id) {
-    return mongoose.Types.ObjectId.isValid(id);
+    return mongoose.Types.ObjectId.isValid(id); 
 }
 
 
@@ -47,9 +47,10 @@ router.put('/', async(req, res)=>{
     const productId = req.body?.productId || null;
     if(!productId) return res.status(400).send({mesagge: 'productId required.'});
 
-    const {error} = validate(req.body);
+    const {error} = validate(req.body); // validation
     if(error) return res.status(400).send({message: error.details[0].message});
 
+    // updates and returns updated document or null
     const product = await Product.findByIdAndUpdate(productId, {
         $set: {
             name : req.body.name,
@@ -59,6 +60,8 @@ router.put('/', async(req, res)=>{
         }
     }, {new:true});
 
+    if(!product) return res.status(404).send({message: 'product not found' });
+
     res.send(product);
 });
 
@@ -67,7 +70,7 @@ router.delete('/:id', async(req, res)=>{
 
     if(!isValidId(req.params.id)) return res.status(400).send({mesagge: 'product ID not valid.'});
     
-    const product = await Product.findByIdAndDelete(req.params.id);
+    const product = await Product.findByIdAndDelete(req.params.id); // deletes and returns document or null
     if(!product) return res.status(404).send({mesagge: 'product not found.'});
 
     res.send(product);

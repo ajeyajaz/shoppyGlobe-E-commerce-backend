@@ -15,9 +15,11 @@ router.post('/', async(req, res)=>{
     let user = await User.findOne({email: req.body.email});
     if(!user) return res.status(404).send({message: 'invalid email or password.'});
 
-    const isValidPassword = await bcrypt.compare(req.body.password, user.password); //decrypt
+    //compares decrypt password, returns true or false
+    const isValidPassword = await bcrypt.compare(req.body.password, user.password); 
     if(!isValidPassword) return res.status(404).send({message: 'invalid email or password.'});
 
+    //creates jwt token
     const token = jwt.sign({_id: user._id}, 'myPrivateKey', {expiresIn: "1h"});
 
     res.send({token});
@@ -32,7 +34,7 @@ function validateUser(value){
         password: joi.string().required().min(8).max(50)
     });
 
-    return {error, value} = schema.validate(value);
+    return {error} = schema.validate(value);
 }
 
 

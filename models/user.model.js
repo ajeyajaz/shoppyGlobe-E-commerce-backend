@@ -10,7 +10,7 @@ const userSchema = new mongoose.Schema({
 
 const User = mongoose.model('User', userSchema);
 
-
+// return  errors if validation fails or undifined
 function validateUser(value = {}){
 
     //schema based validation
@@ -20,7 +20,7 @@ function validateUser(value = {}){
         password: joi.string().required().min(8).max(50)
     });
 
-    return {error, value} = schema.validate(value);
+    return {error} = schema.validate(value);
 }
 
 exports.User = User;

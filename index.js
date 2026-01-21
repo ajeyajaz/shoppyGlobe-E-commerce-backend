@@ -1,5 +1,7 @@
 const mongoose = require('mongoose');
 const express = require('express');
+const Joi = require('joi')
+Joi.objectId = require('joi-objectid')(Joi) 
 const carts =  require('./routes/cart');
 const users = require('./routes/user');
 const auth = require('./routes/auth');

@@ -111,7 +111,7 @@ DELETE - http://localhost:4000/cart/:id
 ``` 
 USERS-COLLECTION
 ```
-![DELETE Cart](screenshots/mongodb/product-collection.png)
+![DELETE Cart](screenshots/mongodb/users-collection.png)
 
 
 ``` 
